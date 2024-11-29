@@ -16,6 +16,7 @@ interface FormManagerProps {
   voiceLanguage: VoiceInputVoiceLanguage
   onCalculate: () => void
   errors: Record<string, string>
+  readOnly?: boolean
 }
 
 const createCreditRow = (): CreditRow => ({
@@ -88,72 +89,97 @@ export const FormManager: React.FC<FormManagerProps> = ({
   onVoiceInput,
   voiceLanguage,
   onCalculate,
-  errors
+  errors,
+  readOnly = false
 }) => {
   const styles = useStyles()
 
   const handleUpdateCreditRow = (id: string, field: keyof CreditRow, value: string) => {
-    const updatedRows = updateCreditRow(form.creditRows, id, field, value)
-    onUpdateForm({ creditRows: updatedRows })
+    if (!readOnly) {
+      const updatedRows = updateCreditRow(form.creditRows, id, field, value)
+      onUpdateForm({ creditRows: updatedRows })
+    }
   }
 
   const handleUpdateCreditPayeeRow = (id: string, field: keyof CreditPayeeRow, value: string) => {
-    const updatedRows = updateCreditPayeeRow(form.creditPayeeRows, id, field, value)
-    onUpdateForm({ creditPayeeRows: updatedRows })
+    if (!readOnly) {
+      const updatedRows = updateCreditPayeeRow(form.creditPayeeRows, id, field, value)
+      onUpdateForm({ creditPayeeRows: updatedRows })
+    }
   }
 
   const handleUpdateDepenseRow = (id: string, field: keyof DepenseRow, value: string) => {
-    const updatedRows = updateDepenseRow(form.depenseRows, id, field, value)
-    onUpdateForm({ depenseRows: updatedRows })
+    if (!readOnly) {
+      const updatedRows = updateDepenseRow(form.depenseRows, id, field, value)
+      onUpdateForm({ depenseRows: updatedRows })
+    }
   }
 
   const handleUpdateRetraitRow = (id: string, field: keyof RetraitRow, value: string) => {
-    const updatedRows = updateRetraitRow(form.retraitRows, id, field, value)
-    onUpdateForm({ retraitRows: updatedRows })
+    if (!readOnly) {
+      const updatedRows = updateRetraitRow(form.retraitRows, id, field, value)
+      onUpdateForm({ retraitRows: updatedRows })
+    }
   }
 
   const handleRemoveCreditRow = (id: string) => {
-    const updatedRows = form.creditRows.filter(row => row.id !== id)
-    onUpdateForm({ creditRows: updatedRows })
+    if (!readOnly) {
+      const updatedRows = form.creditRows.filter(row => row.id !== id)
+      onUpdateForm({ creditRows: updatedRows })
+    }
   }
 
   const handleRemoveCreditPayeeRow = (id: string) => {
-    const updatedRows = form.creditPayeeRows.filter(row => row.id !== id)
-    onUpdateForm({ creditPayeeRows: updatedRows })
+    if (!readOnly) {
+      const updatedRows = form.creditPayeeRows.filter(row => row.id !== id)
+      onUpdateForm({ creditPayeeRows: updatedRows })
+    }
   }
 
   const handleRemoveDepenseRow = (id: string) => {
-    const updatedRows = form.depenseRows.filter(row => row.id !== id)
-    onUpdateForm({ depenseRows: updatedRows })
+    if (!readOnly) {
+      const updatedRows = form.depenseRows.filter(row => row.id !== id)
+      onUpdateForm({ depenseRows: updatedRows })
+    }
   }
 
   const handleRemoveRetraitRow = (id: string) => {
-    const updatedRows = form.retraitRows.filter(row => row.id !== id)
-    onUpdateForm({ retraitRows: updatedRows })
+    if (!readOnly) {
+      const updatedRows = form.retraitRows.filter(row => row.id !== id)
+      onUpdateForm({ retraitRows: updatedRows })
+    }
   }
 
   const handleAddCreditRow = () => {
-    onUpdateForm({
-      creditRows: [...form.creditRows, createCreditRow()]
-    })
+    if (!readOnly) {
+      onUpdateForm({
+        creditRows: [...form.creditRows, createCreditRow()]
+      })
+    }
   }
 
   const handleAddCreditPayeeRow = () => {
-    onUpdateForm({
-      creditPayeeRows: [...form.creditPayeeRows, createCreditPayeeRow()]
-    })
+    if (!readOnly) {
+      onUpdateForm({
+        creditPayeeRows: [...form.creditPayeeRows, createCreditPayeeRow()]
+      })
+    }
   }
 
   const handleAddDepenseRow = () => {
-    onUpdateForm({
-      depenseRows: [...form.depenseRows, createDepenseRow()]
-    })
+    if (!readOnly) {
+      onUpdateForm({
+        depenseRows: [...form.depenseRows, createDepenseRow()]
+      })
+    }
   }
 
   const handleAddRetraitRow = () => {
-    onUpdateForm({
-      retraitRows: [...form.retraitRows, createRetraitRow()]
-    })
+    if (!readOnly) {
+      onUpdateForm({
+        retraitRows: [...form.retraitRows, createRetraitRow()]
+      })
+    }
   }
 
   return (
@@ -185,11 +211,13 @@ export const FormManager: React.FC<FormManagerProps> = ({
         onAddRetraitRow={handleAddRetraitRow}
         onVoiceInput={onVoiceInput}
         voiceLanguage={voiceLanguage}
+        disabled={readOnly}
       />
 
       <FormCalculation
         form={form}
         onCalculate={onCalculate}
+        disabled={readOnly}
       />
     </div>
   )

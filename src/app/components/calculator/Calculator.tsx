@@ -14,7 +14,17 @@ import { CalculationHistory } from './calculation/CalculationHistory'
 import type { Form as VoiceForm, VoiceLanguage as VoiceInputVoiceLanguage } from '../../types/voice.types'
 import type { Form } from '../../types/calculator.types'
 
-export default function Calculator() {
+interface CalculatorProps {
+  initialForm?: Form;
+  onFormUpdate?: (form: Form) => void;
+  readOnly?: boolean;
+}
+
+const Calculator: React.FC<CalculatorProps> = ({
+  initialForm,
+  onFormUpdate,
+  readOnly = false
+}) => {
   // State Management
   const {
     sites,
@@ -26,7 +36,7 @@ export default function Calculator() {
   } = useSiteState()
 
   const currentSite = sites[currentSiteIndex]
-  const currentForm = currentSite?.forms[currentFormIndex] || {
+  const currentForm = initialForm || currentSite?.forms[currentFormIndex] || {
     id: '1',
     result: '',
     timestamp: new Date().toISOString(),
@@ -68,6 +78,7 @@ export default function Calculator() {
   // Event Handlers
   const handleFormUpdate = (updatedForm: Partial<Form>) => {
     updateForm(updatedForm)
+    if (onFormUpdate) onFormUpdate(updatedForm as Form)
     updateSiteForm(currentSiteIndex, currentFormIndex, updatedForm)
   }
 
@@ -83,13 +94,16 @@ export default function Calculator() {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <FormManager
           form={form}
-          onUpdateForm={updateForm}
+          onUpdateForm={handleFormUpdate}
           onVoiceInput={startListening}
           voiceLanguage={voiceLanguage}
           onCalculate={handleCalculate}
           errors={errors}
+          readOnly={readOnly}
         />
       </main>
     </div>
   )
 }
+
+export default Calculator;

@@ -1,5 +1,5 @@
-import Calc302 from './components/calc302'
+import { redirect } from 'next/navigation';
 
 export default function Home() {
-  return <Calc302 />
+  redirect('/original');
 }

@@ -10,6 +10,7 @@ interface CreditRowProps {
   onRemove: (id: string) => void
   voiceLanguage: VoiceLanguage
   onVoiceInput: (callback: (value: string) => void, isNumberField?: boolean) => void
+  disabled?: boolean
 }
 
 export const CreditRowComponent: React.FC<CreditRowProps> = ({
@@ -17,7 +18,8 @@ export const CreditRowComponent: React.FC<CreditRowProps> = ({
   onUpdate,
   onRemove,
   voiceLanguage,
-  onVoiceInput
+  onVoiceInput,
+  disabled = false
 }) => {
   const styles = useStyles()
 
@@ -38,11 +40,13 @@ export const CreditRowComponent: React.FC<CreditRowProps> = ({
             value={row.totalClient}
             onChange={(e) => handleInputChange('totalClient', e.target.value)}
             className={styles.input}
+            disabled={disabled}
           />
           <VoiceInputButton
             onVoiceInput={(callback) => onVoiceInput(callback, true)}
             language={voiceLanguage}
             isNumberField={true}
+            disabled={disabled}
           />
         </div>
       </div>
@@ -58,10 +62,12 @@ export const CreditRowComponent: React.FC<CreditRowProps> = ({
             value={row.details}
             onChange={(e) => handleInputChange('details', e.target.value)}
             className={styles.input}
+            disabled={disabled}
           />
           <VoiceInputButton
             onVoiceInput={(callback) => onVoiceInput(callback)}
             language={voiceLanguage}
+            disabled={disabled}
           />
         </div>
       </div>
@@ -77,10 +83,12 @@ export const CreditRowComponent: React.FC<CreditRowProps> = ({
             value={row.client}
             onChange={(e) => handleInputChange('client', e.target.value)}
             className={styles.input}
+            disabled={disabled}
           />
           <VoiceInputButton
             onVoiceInput={(callback) => onVoiceInput(callback)}
             language={voiceLanguage}
+            disabled={disabled}
           />
         </div>
       </div>
@@ -90,6 +98,7 @@ export const CreditRowComponent: React.FC<CreditRowProps> = ({
         onClick={() => onRemove(row.id)}
         className={styles.removeButton}
         aria-label="Remove credit row"
+        disabled={disabled}
       >
         <Trash2 className="w-5 h-5" />
         <span className="sr-only">Remove row</span>

@@ -28,6 +28,7 @@ interface RowManagerProps {
   onAddRetraitRow: () => void
   onVoiceInput: (callback: (value: string) => void, isNumberField?: boolean) => void
   voiceLanguage: VoiceLanguage
+  disabled?: boolean
 }
 
 export const RowManager: React.FC<RowManagerProps> = ({
@@ -48,7 +49,8 @@ export const RowManager: React.FC<RowManagerProps> = ({
   onAddDepenseRow,
   onAddRetraitRow,
   onVoiceInput,
-  voiceLanguage
+  voiceLanguage,
+  disabled
 }) => {
   return (
     <div className="space-y-8">
@@ -59,6 +61,7 @@ export const RowManager: React.FC<RowManagerProps> = ({
           <button
             onClick={onAddCreditRow}
             className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
+            disabled={disabled}
           >
             Add Credit
           </button>
@@ -72,6 +75,7 @@ export const RowManager: React.FC<RowManagerProps> = ({
               onRemove={() => onRemoveCreditRow(row.id)}
               onVoiceInput={(callback, isNumberField = false) => onVoiceInput(callback, isNumberField)}
               voiceLanguage={voiceLanguage}
+              disabled={disabled}
             />
           ))}
         </div>
@@ -84,6 +88,7 @@ export const RowManager: React.FC<RowManagerProps> = ({
           <button
             onClick={onAddCreditPayeeRow}
             className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
+            disabled={disabled}
           >
             Add Credit Payee
           </button>
@@ -97,6 +102,7 @@ export const RowManager: React.FC<RowManagerProps> = ({
               onRemove={() => onRemoveCreditPayeeRow(row.id)}
               onVoiceInput={(callback, isNumberField = false) => onVoiceInput(callback, isNumberField)}
               voiceLanguage={voiceLanguage}
+              disabled={disabled}
             />
           ))}
         </div>
@@ -109,6 +115,7 @@ export const RowManager: React.FC<RowManagerProps> = ({
           <button
             onClick={onAddDepenseRow}
             className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+            disabled={disabled}
           >
             Add Depense
           </button>
@@ -122,6 +129,7 @@ export const RowManager: React.FC<RowManagerProps> = ({
               onRemove={() => onRemoveDepenseRow(row.id)}
               onVoiceInput={(callback, isNumberField = false) => onVoiceInput(callback, isNumberField)}
               voiceLanguage={voiceLanguage}
+              disabled={disabled}
             />
           ))}
         </div>
@@ -134,6 +142,7 @@ export const RowManager: React.FC<RowManagerProps> = ({
           <button
             onClick={onAddRetraitRow}
             className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+            disabled={disabled}
           >
             Add Retrait
           </button>
@@ -147,6 +156,7 @@ export const RowManager: React.FC<RowManagerProps> = ({
               onRemove={() => onRemoveRetraitRow(row.id)}
               onVoiceInput={(callback, isNumberField = false) => onVoiceInput(callback, isNumberField)}
               voiceLanguage={voiceLanguage}
+              disabled={disabled}
             />
           ))}
         </div>

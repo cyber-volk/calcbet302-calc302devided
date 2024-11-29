@@ -12,6 +12,7 @@ interface CreditPayeeRowProps {
   onRemove: (id: string) => void
   voiceLanguage: VoiceLanguage
   onVoiceInput: (callback: (value: string) => void, isNumberField?: boolean) => void
+  disabled?: boolean
 }
 
 export const CreditPayeeRowComponent: React.FC<CreditPayeeRowProps> = ({
@@ -19,7 +20,8 @@ export const CreditPayeeRowComponent: React.FC<CreditPayeeRowProps> = ({
   onUpdate,
   onRemove,
   voiceLanguage,
-  onVoiceInput
+  onVoiceInput,
+  disabled = false
 }) => {
   const styles = useStyles()
 
@@ -40,11 +42,13 @@ export const CreditPayeeRowComponent: React.FC<CreditPayeeRowProps> = ({
             value={row.totalPayee}
             onChange={(e) => handleInputChange('totalPayee', e.target.value)}
             className={styles.input}
+            disabled={disabled}
           />
           <VoiceInputButton
             onVoiceInput={(callback) => onVoiceInput(callback, true)}
             language={voiceLanguage}
             isNumberField={true}
+            disabled={disabled}
           />
         </div>
       </div>
@@ -60,10 +64,12 @@ export const CreditPayeeRowComponent: React.FC<CreditPayeeRowProps> = ({
             value={row.details}
             onChange={(e) => handleInputChange('details', e.target.value)}
             className={styles.input}
+            disabled={disabled}
           />
           <VoiceInputButton
             onVoiceInput={(callback) => onVoiceInput(callback)}
             language={voiceLanguage}
+            disabled={disabled}
           />
         </div>
       </div>
@@ -79,10 +85,12 @@ export const CreditPayeeRowComponent: React.FC<CreditPayeeRowProps> = ({
             value={row.client}
             onChange={(e) => handleInputChange('client', e.target.value)}
             className={styles.input}
+            disabled={disabled}
           />
           <VoiceInputButton
             onVoiceInput={(callback) => onVoiceInput(callback)}
             language={voiceLanguage}
+            disabled={disabled}
           />
         </div>
       </div>
@@ -92,6 +100,7 @@ export const CreditPayeeRowComponent: React.FC<CreditPayeeRowProps> = ({
         onClick={() => onRemove(row.id)}
         className={styles.removeButton}
         aria-label="Remove row"
+        disabled={disabled}
       >
         <Trash2 className="w-5 h-5" />
         <span className="sr-only">Remove row</span>

@@ -7,11 +7,13 @@ import type { Form, CreditRow, CreditPayeeRow, DepenseRow, RetraitRow } from '..
 interface FormCalculationProps {
   form: Form
   onCalculate: () => void
+  disabled?: boolean
 }
 
 export const FormCalculation: React.FC<FormCalculationProps> = ({
   form,
-  onCalculate
+  onCalculate,
+  disabled = false
 }) => {
   const styles = useStyles()
 
@@ -73,6 +75,7 @@ export const FormCalculation: React.FC<FormCalculationProps> = ({
       <button
         onClick={onCalculate}
         className={styles.calculateButton}
+        disabled={disabled}
       >
         Calculate
       </button>

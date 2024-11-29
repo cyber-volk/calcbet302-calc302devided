@@ -20,9 +20,9 @@ export function Navbar() {
             </div>
             <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
               <Link
-                href="/"
+                href="/original"
                 className={`inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium ${
-                  isActive('/')
+                  isActive('/original')
                     ? 'border-blue-500 text-gray-900'
                     : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
                 }`}
@@ -55,9 +55,9 @@ export function Navbar() {
       <div className="sm:hidden">
         <div className="pt-2 pb-3 space-y-1">
           <Link
-            href="/"
+            href="/original"
             className={`flex items-center px-3 py-2 text-base font-medium ${
-              isActive('/')
+              isActive('/original')
                 ? 'bg-blue-50 border-l-4 border-blue-500 text-blue-700'
                 : 'text-gray-600 hover:bg-gray-50 hover:border-l-4 hover:border-gray-300'
             }`}

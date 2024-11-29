@@ -10,6 +10,7 @@ interface RetraitRowProps {
   onRemove: (id: string) => void
   voiceLanguage: VoiceLanguage
   onVoiceInput: (callback: (value: string) => void, isNumberField?: boolean) => void
+  disabled?: boolean
 }
 
 export const RetraitRowComponent: React.FC<RetraitRowProps> = ({
@@ -17,7 +18,8 @@ export const RetraitRowComponent: React.FC<RetraitRowProps> = ({
   onUpdate,
   onRemove,
   voiceLanguage,
-  onVoiceInput
+  onVoiceInput,
+  disabled = false
 }) => {
   const styles = useStyles()
 
@@ -38,10 +40,12 @@ export const RetraitRowComponent: React.FC<RetraitRowProps> = ({
             value={row.retraitPayee}
             onChange={(e) => handleInputChange('retraitPayee', e.target.value)}
             className={styles.input}
+            disabled={disabled}
           />
           <VoiceInputButton
             onVoiceInput={(callback) => onVoiceInput(callback)}
             language={voiceLanguage}
+            disabled={disabled}
           />
         </div>
       </div>
@@ -57,11 +61,13 @@ export const RetraitRowComponent: React.FC<RetraitRowProps> = ({
             value={row.retrait}
             onChange={(e) => handleInputChange('retrait', e.target.value)}
             className={styles.input}
+            disabled={disabled}
           />
           <VoiceInputButton
             onVoiceInput={(callback) => onVoiceInput(callback, true)}
             language={voiceLanguage}
             isNumberField={true}
+            disabled={disabled}
           />
         </div>
       </div>
@@ -77,10 +83,12 @@ export const RetraitRowComponent: React.FC<RetraitRowProps> = ({
             value={row.client}
             onChange={(e) => handleInputChange('client', e.target.value)}
             className={styles.input}
+            disabled={disabled}
           />
           <VoiceInputButton
             onVoiceInput={(callback) => onVoiceInput(callback)}
             language={voiceLanguage}
+            disabled={disabled}
           />
         </div>
       </div>
@@ -90,6 +98,7 @@ export const RetraitRowComponent: React.FC<RetraitRowProps> = ({
         onClick={() => onRemove(row.id)}
         className={styles.removeButton}
         aria-label="Remove row"
+        disabled={disabled}
       >
         <Trash2 className="w-5 h-5" />
         <span className="sr-only">Remove row</span>
